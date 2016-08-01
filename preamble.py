@@ -26,6 +26,8 @@ def load():
                          # "\\usepackage{unicode-math}",  # unicode math setup
                          # r"\setmathfont{xits-math.otf}",
                          # r"\setmainfont{DejaVu Serif}",
+                         # r"\newcommand\pdrv[2]{\frac{\partial #1}{\partial #2}}",
+                         "\\usepackage{commath}"
                          ]
     }
 
