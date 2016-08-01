@@ -1,5 +1,19 @@
-\pd{\rho}{t} + \pd{\rho u}{x} + \pd{\rho v}{y} + \pd{\rho w}{z} = 0
-APE = \frac{R\overline{p}_{S}^{-\kappa}}{2}\int^{p_S}_{0}p^{\kappa-1}\intoo{-g\pd{\overline{\theta}}{p}}\overline{\theta^\prime 2} \dif p
+\pd{\rho}{t} + \nabla \cdot (\rho\vec{v}) = 0
+\frac{\Dif\vec{v}}{\Dif t} = -\frac{\nabla p}{\rho} + \nu\nabla^2\vec{v} + \vec{F}
+\frac{\Dif\theta}{\Dif t} = \frac{1}{c_p} + \del{\frac{\theta}{T}}\dot{Q}
+\pd{p}{z} = -\rho g
+p = \rho R T
+\dif I = T\dif \eta -p\dif\alpha + \mu\dif S
+c_p = c_v + R
+\dif Q = c_p \dif T - \alpha\dif p
+\theta = T\intoo{\frac{p_0}{p}}^\kappa
+B = \frac{\vec{v}^2}{2} + c_p T + gz = const
+\vec{F}_{Co} = -2\vec{\Omega}\times\vec{v}_R
+f = 2\omega sin\phi
+Ro \equiv \frac{U}{fL}
+\vec{f}\times{u} \approx -\frac{1}{\rho}\nabla_z p
+N^2 = -\frac{g}{\tilde{\rho}}\pd{\tilde{\rho}}{z}
+APE = \frac{R\overline{p}_{S}^{-\kappa}}{2}\int^{p_S}_{0}p^{\kappa-1}\intoo{-g\pd{\overline{\theta}}{p}}\overline{\theta^{\prime 2}} \dif p
 \vec{\omega} = \nabla\times \vec{v}
 C = \oint\vec{v}\cdot \dif\vec{l}
 \frac{\Dif}{\Dif t}\oint\vec{v}\cdot \dif\vec{r}
@@ -9,3 +23,13 @@ Bu = \intoo{\frac{Ro}{Fr}}^2
 \intoo{U-c}\intoo{\tilde{\psi}_{yy} - k^2\tilde{\psi}} + \intoo{\beta - U_{yy}}\tilde{\psi} = 0
 \sigma \sim \frac{U}{L_d} = \Lambda\frac{f_0}{N}
 q = \beta y + \intcc{\nabla^2 + \pd{}{z}\intoo{\frac{f_0^2}{N^2}\pd{}{z}}}\psi
+\mathcal{F} = -\overline{u'v'}\vec{j} + \frac{f_0}{N^2}\overline{v'b'}\vec{k}
+\pd{\mathcal{A}}{t} + \nabla\cdot\vec{\mathcal{F}} = \mathcal{D}
+\psi' = Re\Psi e^{i(kx+ly+mz-\omega t)}
+\omega = \overline{u}k - \frac{\beta k}{\kappa^2}
+\pd{}{t}\cbr{ \iint\frac{1}{2}\frac{\overline{q'^2}}{\partial_y\overline{q}}\dif y\dif z - \int\intcc{\frac{1}{2}\frac{f_0}{N^2}\frac{\overline{b'^2}}{\partial_y\overline{b}}}^H_0\dif y} = 0
+\mathcal{E}(k) = \mathcal{K}\epsilon^{2/3}k^{-5/3}
+L_v \sim \del{ \frac{\nu^3}{\epsilon} }^{1/4}
+m = (u + \Omega r cos\vartheta)rcos\vartheta
+\theta = \theta(0) - \frac{\theta_0\Omega^2y^4}{2gHa^2}
+f_0(\vec{u}_1 - \vec{u}_2) = g'\vec{k}\times\nabla\eta

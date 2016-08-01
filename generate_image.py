@@ -14,6 +14,8 @@ ap = argparse.ArgumentParser(os.path.basename(__file__),
                              ArgumentDefaultsHelpFormatter)
 ap.add_argument('-s', '--tex_source', type=str, default='equations.tex',
                 help='File with equations typeset in TeX')
+ap.add_argument('-r', '--repeat', action='count', default=1,
+                help='Repeat equations r times')
 
 facecolor = '#fff9ff'
 fontcolor = '#333333'
@@ -24,7 +26,7 @@ txt_dict = dict(ha='center', va='center', color=fontcolor,
 # pe_dict = dict(linewidth=1, foreground=strokecolor)
 
 
-def main(src_tex='equations.tex'):
+def main(src_tex='equations.tex', repeat=1):
     eqs = []
     with open(src_tex) as f:
         for line in f.read().splitlines():
@@ -33,7 +35,7 @@ def main(src_tex='equations.tex'):
 
     fig, ax = plt.subplots(figsize=(10, 10))
 
-    for eq in eqs:
+    for eq in eqs*repeat:
         # idx = np.random.randint(0, len(eqs))
         # eq = eqs[idx]
         size = np.random.uniform(10, 30)
@@ -48,4 +50,4 @@ def main(src_tex='equations.tex'):
 
 if __name__ == '__main__':
     args = ap.parse_args()
-    main(args.tex_source)
+    main(src_tex=args.tex_source, repeat=args.repeat)
