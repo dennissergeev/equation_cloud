@@ -1,7 +1,7 @@
 engine = python3
 script = generate_image.py
 preamble = preamble.py
-flags = -r 
+flags = -rr 
 src = equations.tex
 out = figure.pdf
 prev = preview.png

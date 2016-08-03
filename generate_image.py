@@ -35,12 +35,13 @@ def main(src_tex='equations.tex', repeat=1):
 
     fig, ax = plt.subplots(figsize=(10, 10))
 
-    for eq in eqs*repeat:
+    alphas = np.logspace(-2, 0, len(eqs*repeat))
+    for i, eq in enumerate(eqs*repeat):
         # idx = np.random.randint(0, len(eqs))
         # eq = eqs[idx]
         size = np.random.uniform(10, 30)
         x, y = np.random.uniform(0, 1, 2)
-        alpha = np.random.uniform(0, 1)
+        alpha = alphas[i]  # np.random.uniform(0, 1)
         ax.text(x, y, eq, alpha=alpha, size=size,
                 transform=ax.transAxes, **txt_dict)
         # t.set_path_effects([PathEffects.withStroke(**pe_dict)])
