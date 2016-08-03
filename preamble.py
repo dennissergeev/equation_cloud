@@ -15,6 +15,7 @@ def load():
         "text.usetex": True,  # use inline math for ticks
         "pgf.rcfonts": False,  # don't setup fonts from rc parameters
         "pgf.preamble": [
+                         "\\usepackage{commath}",
                          # "\\usepackage{mathspec}",
                          # r"\setmainfont{whatever it takes}",
                          # r"\setmathsfont(Digits,Latin,Greek)"
@@ -27,7 +28,6 @@ def load():
                          # r"\setmathfont{xits-math.otf}",
                          # r"\setmainfont{DejaVu Serif}",
                          # r"\newcommand\pdrv[2]{\frac{\partial #1}{\partial #2}}",
-                         "\\usepackage{commath}"
                          ]
     }
 
