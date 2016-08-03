@@ -1,5 +1,6 @@
 engine = python3
 script = generate_image.py
+preamble = preamble.py
 flags = -r 
 src = equations.tex
 out = figure.pdf
@@ -15,7 +16,7 @@ figure: $(out)
 preview: $(out)
 	convert $(out)[0] $(prev)
 
-$(out) : $(src) $(script)
+$(out) : $(src) $(script) $(preamble)
 	$(engine) $(script) --tex_source $(src) $(flags)
 
 .PHONY: clean
