@@ -6,19 +6,22 @@ src = equations.tex
 out = figure.pdf
 prev = preview.png
 
-all: $(out)
-	convert $(out)[0] $(prev)
+.PHONY: update clean
+
+show: $(prev)
 	xdg-open $(prev)
 
+$(prev): $(out)
+	convert $(out)[0] $(prev)
+	
 figure: $(out)
 	xdg-open $(out)
 
-preview: $(out)
-	convert $(out)[0] $(prev)
-
-$(out) : $(src) $(script) $(preamble)
+$(out): $(src) $(script) $(preamble)
 	$(engine) $(script) --tex_source $(src) $(flags)
 
-.PHONY: clean
-clean :
+update:
+	touch $(script)
+
+clean:
 	-rm $(out)
