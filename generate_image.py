@@ -16,6 +16,9 @@ ap.add_argument('-s', '--tex_source', type=str, default='equations.tex',
                 help='File with equations typeset in TeX')
 ap.add_argument('-r', '--repeat', action='count', default=1,
                 help='Repeat equations r times')
+ap.add_argument('-a', '--alpha', type=str,
+                default='random', choices=['random', 'logspace'],
+                help='Alpha distribution: random uniform or log-spaced')
 
 facecolor = '#fff9ff'
 fontcolor = '#333333'
@@ -26,21 +29,24 @@ txt_dict = dict(ha='center', va='center', color=fontcolor,
 # pe_dict = dict(linewidth=1, foreground=strokecolor)
 
 
-def main(src_tex='equations.tex', repeat=1):
+def main(src_tex='equations.tex', repeat=1, alpha_mode='random'):
     eqs = []
     with open(src_tex) as f:
         for line in f.read().splitlines():
             eq = r'${}$'.format(line)
             eqs.append(eq)
 
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig = plt.figure(figsize=(10, 10))
+    ax = fig.add_axes([0, 0, 1, 1])
 
-    alphas = np.logspace(-2, 0, len(eqs*repeat))
+    if alpha_mode == 'logspace':
+        alphas = np.logspace(-2, 0, len(eqs*repeat))
+    elif alpha_mode == 'random':
+        alphas = np.random.rand(len(eqs*repeat))
+
     for i, eq in enumerate(eqs*repeat):
-        # idx = np.random.randint(0, len(eqs))
-        # eq = eqs[idx]
         size = np.random.uniform(10, 30)
-        x, y = np.random.uniform(0, 1, 2)
+        x, y = np.random.uniform(0.0, 1.0, 2)
         alpha = alphas[i]  # np.random.uniform(0, 1)
         ax.text(x, y, eq, alpha=alpha, size=size,
                 transform=ax.transAxes, **txt_dict)
@@ -51,4 +57,4 @@ def main(src_tex='equations.tex', repeat=1):
 
 if __name__ == '__main__':
     args = ap.parse_args()
-    main(src_tex=args.tex_source, repeat=args.repeat)
+    main(src_tex=args.tex_source, repeat=args.repeat, alpha_mode=args.alpha)
