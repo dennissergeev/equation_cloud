@@ -2,6 +2,7 @@
 from preamble import load
 load()
 import argparse  # NOQA
+import matplotlib.image as mpimg  # NOQA
 import matplotlib.pyplot as plt  # NOQA
 import matplotlib.patheffects as PathEffects  # NOQA
 import numpy as np  # NOQA
@@ -19,6 +20,8 @@ ap.add_argument('-r', '--repeat', action='count', default=1,
 ap.add_argument('-a', '--alpha', type=str,
                 default='random', choices=['random', 'logspace'],
                 help='Alpha distribution: random uniform or log-spaced')
+ap.add_argument('-b', '--background_image', type=str,
+                help='Path to an image file to use as a background')
 
 facecolor = '#fff9ff'
 fontcolor = '#333333'
@@ -29,7 +32,8 @@ txt_dict = dict(ha='center', va='center', color=fontcolor,
 # pe_dict = dict(linewidth=1, foreground=strokecolor)
 
 
-def main(src_tex='equations.tex', repeat=1, alpha_mode='random'):
+def main(src_tex='equations.tex', repeat=1, alpha_mode='random',
+         background_image=None):
     eqs = []
     with open(src_tex) as f:
         for line in f.read().splitlines():
@@ -39,13 +43,17 @@ def main(src_tex='equations.tex', repeat=1, alpha_mode='random'):
     fig = plt.figure(figsize=(10, 10))
     ax = fig.add_axes([0, 0, 1, 1])
 
+    if background_image is not None:
+        img = mpimg.imread(background_image)
+        ax.imshow(img, alpha=0.2, zorder=0, extent=[0, 1, 0, 1])
+
     if alpha_mode == 'logspace':
         alphas = np.logspace(-2, 0, len(eqs*repeat))
     elif alpha_mode == 'random':
         alphas = np.random.rand(len(eqs*repeat))
 
     for i, eq in enumerate(eqs*repeat):
-        size = np.random.uniform(10, 30)
+        size = np.random.uniform(50, 60)
         x, y = np.random.uniform(0.0, 1.0, 2)
         alpha = alphas[i]  # np.random.uniform(0, 1)
         ax.text(x, y, eq, alpha=alpha, size=size,
@@ -57,4 +65,5 @@ def main(src_tex='equations.tex', repeat=1, alpha_mode='random'):
 
 if __name__ == '__main__':
     args = ap.parse_args()
-    main(src_tex=args.tex_source, repeat=args.repeat, alpha_mode=args.alpha)
+    main(src_tex=args.tex_source, repeat=args.repeat, alpha_mode=args.alpha,
+         background_image=args.background_image)

@@ -5,3 +5,4 @@ _build
 build
 dist
 *egg*
+*.out *.aux *.log *.synctex.gz

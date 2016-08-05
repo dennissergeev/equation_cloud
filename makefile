@@ -1,12 +1,22 @@
-engine = python3
+py = python3
 script = generate_image.py
 preamble = preamble.py
-flags = -rrr -a logspace
+flags = -rr -a logspace
 src = equations.tex
-out = figure.pdf
+out = *.pdf *.out *.aux *.log
 prev = preview.png
+texpy = gen_tex_doc.py
+texdoc = tex_doc
+texeng = xelatex
 
 .PHONY: update clean
+
+tex: $(texdoc)
+	$(texeng) $(texdoc).tex
+	xdg-open $(texdoc).pdf
+
+$(texdoc): $(src) $(texpy)
+	$(py) $(texpy) -s $(src) -o $(texdoc).tex
 
 show: $(prev)
 	xdg-open $(prev)
@@ -18,10 +28,10 @@ figure: $(out)
 	xdg-open $(out)
 
 $(out): $(src) $(script) $(preamble)
-	$(engine) $(script) --tex_source $(src) $(flags)
+	$(py) $(script) --tex_source $(src) $(flags)
 
 update:
 	touch $(script)
 
 clean:
-	-rm $(out)
+	-rm $(out) $(texdoc)
