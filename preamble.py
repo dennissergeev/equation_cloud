@@ -6,8 +6,8 @@ Source: http://matplotlib.org/users/pgf.html
 import matplotlib as mpl
 
 pgf_with_custom_preamble = {
-    "font.family": "serif",  # use serif/main font for text elements
-    "figure.facecolor": "0",
+    # "font.family": "serif",  # use serif/main font for text elements
+    # "figure.facecolor": "0",
     "text.usetex": True,  # use inline math for ticks
     "pgf.rcfonts": False,  # don't setup fonts from rc parameters
     "pgf.preamble": [
@@ -28,6 +28,12 @@ pgf_with_custom_preamble = {
 }
 
 
-def load():
-    mpl.use("pgf")
-    mpl.rcParams.update(pgf_with_custom_preamble)
+def load(mode='pgf'):
+    if mode == 'pgf':
+        mpl.use('pgf')
+        mpl.rcParams.update(pgf_with_custom_preamble)
+
+    elif mode == 'latex':
+        mpl.rcParams['text.usetex'] = True
+        mpl.rcParams['text.latex.preamble'] = ['\\usepackage{eulervm}',
+                                               '\\usepackage{commath}']

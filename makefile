@@ -35,4 +35,4 @@ $(texdoc): $(src) $(texpy)
 	$(py) $(texpy) -s $(src) -o $(texdoc).tex
 
 clean:
-	-rm $(out) $(texdoc)
+	rm -f $(out) $(texdoc)

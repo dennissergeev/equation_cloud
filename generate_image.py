@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from preamble import load
-load()
+load(mode='latex')
 import argparse  # NOQA
 import matplotlib.image as mpimg  # NOQA
 import matplotlib.pyplot as plt  # NOQA
@@ -27,12 +27,16 @@ ap.add_argument('-m', '--mode', type=str,
                 help='Generate image as a cloud as a paragraph')
 
 
-facecolor = '#fff9ff'
-fontcolor = '#333333'
+fontcolor = '#fff9ff'
+facecolor = '#333333'
+# fontcolor, facecolor = facecolor, fontcolor
 # strokecolor = '#FFFFFF'
 
-txt_dict = dict(ha='center', va='center', color=fontcolor,
-                clip_on=True)
+txt_dict_cloud = dict(color=fontcolor,
+                      ha='center', va='center', clip_on=True)
+txt_dict_para = dict(size=80, rotation=10, linespacing=0.6,
+                     color=fontcolor, wrap=True,
+                     ha='center', va='center', clip_on=True)
 # pe_dict = dict(linewidth=1, foreground=strokecolor)
 
 
@@ -62,7 +66,7 @@ def main(src_tex='equations.tex', mode='cloud',
             x, y = np.random.uniform(0.0, 1.0, 2)
             alpha = alphas[i]  # np.random.uniform(0, 1)
             ax.text(x, y, eq, alpha=alpha, size=size,
-                    transform=ax.transAxes, **txt_dict)
+                    transform=ax.transAxes, **txt_dict_cloud)
             # t.set_path_effects([PathEffects.withStroke(**pe_dict)])
 
     elif mode == 'para':
@@ -74,8 +78,8 @@ def main(src_tex='equations.tex', mode='cloud',
             else:
                 eqs_.append(eq)
         eq_str = ' '.join(eqs_*repeat)
-        ax.text(0.5, 0.5, eq_str, size=60, rotation=10, wrap=True,
-                transform=ax.transAxes, **txt_dict)
+        ax.text(0.5, 0.5, eq_str,
+                transform=ax.transAxes, **txt_dict_para)
 
     ax.axis('off')
     fig.savefig('figure.pdf', facecolor=facecolor)
